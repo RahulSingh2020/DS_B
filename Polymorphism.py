@@ -278,3 +278,173 @@ b1 = Book(400)
 b2 = Book(300)
 print("Total number of pages: ", b1 + b2)
 
+
+
+
+
+# Polymorphism in Python
+####################################################################################################
+#       `                             # Polymorphism in Built-in function
+####################################################################################################
+# len()
+# Example
+students = ['Emma', 'Jessa', 'Kelly']
+school = 'ABC School'
+# calculate count
+print(len(students))
+print(len(school))
+####################################################################################################
+# Overriding
+####################################################################################################
+
+
+####################################################################################################
+#                                                 user defined methods
+####################################################################################################
+
+# Example: Method Overriding
+class Vehicle:
+    def __init__(self, name, color, price):
+        self.name = name
+        self.color = color
+        self.price = price
+    def show(self):
+        print('Details:', self.name, self.color, self.price)
+    def max_speed(self):
+        print('Vehicle max speed is 150')
+    def change_gear(self):
+        print('Vehicle change 6 gear')
+# inherit from vehicle class
+class Car(Vehicle):
+    def max_speed(self):
+        print('Car max speed is 240')
+    def change_gear(self):
+        print('Car change 7 gear')
+# Car Object
+car = Car('Car x1', 'Red', 20000)
+car.show()
+# calls methods from Car class
+car.max_speed()
+car.change_gear()
+# Vehicle Object
+vehicle = Vehicle('Truck x1', 'white', 75000)
+vehicle.show()
+# calls method from a Vehicle class
+vehicle.max_speed()
+vehicle.change_gear()
+
+
+
+# Polymorphism In Class methods
+# Example
+class Ferrari:
+    def fuel_type(self):
+        print("Petrol")
+    def max_speed(self):
+        print("Max speed 350")
+class BMW:
+    def fuel_type(self):
+        print("Diesel")
+    def max_speed(self):
+        print("Max speed is 240")
+ferrari = Ferrari()
+bmw = BMW()
+# iterate objects of same type
+for car in (ferrari, bmw):
+    # call methods without checking class of object
+    car.fuel_type()
+    car.max_speed()
+
+
+# Polymorphism with Function and Objects
+# Example
+class Ferrari:
+    def fuel_type(self):
+        print("Petrol")
+    def max_speed(self):
+        print("Max speed 350")
+class BMW:
+    def fuel_type(self):
+        print("Diesel")
+    def max_speed(self):
+        print("Max speed is 240")
+# normal function
+def car_details(obj):
+    obj.fuel_type()
+    obj.max_speed()
+ferrari = Ferrari()
+bmw = BMW()
+car_details(ferrari)
+car_details(bmw)
+
+####################################################################################################
+#                                                 builtin methods
+####################################################################################################                                      
+
+# Example
+class Shopping:
+    def __init__(self, basket, buyer):
+        self.basket = list(basket)
+        self.buyer = buyer
+    def __len__(self):
+        print('Redefine length')
+        count = len(self.basket)
+        # count total items in a different way
+        # pair of shoes and shir+pant
+        return count * 2
+shopping = Shopping(['Shoes', 'dress'], 'Jessa')
+print(len(shopping))
+
+
+# Example 
+class Person:
+    def __init__(self, first_name, last_name, age):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
+
+    def __str__(self):
+        return f'Person({self.first_name},{self.last_name},{self.age})'
+
+person = Person('John', 'Doe', 25)
+print(person)
+
+
+
+
+####################################################################################################
+# Overloading
+####################################################################################################
+
+####################################################################################################
+#                                                 method
+####################################################################################################
+# Example: User-defined polymorphic method
+class Shape:
+    # function with two default parameters
+    def area(self, a, b=0):
+        if b > 0:
+            print('Area of Rectangle is:', a * b)
+        else:
+            print('Area of Square is:', a ** 2)
+square = Shape()
+square.area(5)
+rectangle = Shape()
+rectangle.area(5, 3)
+
+####################################################################################################
+#                                                 operator
+####################################################################################################
+
+# We can overload + operator to work with custom objects also. Python provides some special or magic function that is automatically invoked when associated with that particular operator.
+# Example
+# the magic method __add__()
+class Book:
+    def __init__(self, pages):
+        self.pages = pages
+    # Overloading + operator with magic method
+    def __add__(self, other):
+        return self.pages + other.pages
+b1 = Book(400)
+b2 = Book(300)
+print("Total number of pages: ", b1 + b2)
